@@ -320,9 +320,3 @@ if __name__ == "__main__":
 - **Rate Limiting**: Be mindful of the rate limits imposed by both the search API and OpenAI. The code includes random delays between requests to help mitigate this.
 - **Error Handling**: The code includes basic error handling for HTTP requests and API interactions. Depending on your use case, you might want to implement more robust error handling and logging mechanisms.
 - **LLM Response Parsing**: The LLM might not always return perfectly formatted JSON. Additional processing or prompt tuning might be necessary to improve the consistency of the responses.
-
-### Conclusion
-
-By integrating a search API and an LLM into the web scraper, we've created a more intelligent and autonomous system capable of discovering relevant websites and extracting structured grant information. This approach leverages the strengths of modern APIs and AI models to enhance the scraper's effectiveness and efficiency.
-
-Feel free to customize the search queries, prompts, and data storage mechanisms to better suit your specific requirements.
