@@ -90,64 +90,132 @@ The objective is to design a recommendation engine that matches organizations wi
 
 ### **6. Pseudo Code for Core Functionality**
 
-```python
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
+Here's a pseudo code outline for the recommendation engine to match organizations with grant-offering organizations based on relevance and needs:
 
-# Function to calculate content-based similarity between organizations and grants
-def calculate_similarity(organization_profile, grant_profiles):
-    """
-    Calculates cosine similarity between an organization's profile and a list of grant profiles.
-    
-    Args:
-        organization_profile (ndarray): Feature vector representing the organization.
-        grant_profiles (ndarray): Matrix where each row is a feature vector representing a grant.
-    
-    Returns:
-        ndarray: Array of similarity scores.
-    """
-    similarities = cosine_similarity(organization_profile.reshape(1, -1), grant_profiles)
-    return similarities.flatten()
+### Pseudo Code for Recommendation Engine
 
-# Function to recommend top grants for an organization
-def recommend_grants(organization_profile, grant_profiles, grant_ids, top_n=5):
-    """
-    Recommends top N grants for an organization based on content-based similarity.
-    
-    Args:
-        organization_profile (ndarray): Feature vector representing the organization.
-        grant_profiles (ndarray): Matrix where each row is a feature vector representing a grant.
-        grant_ids (list): List of grant IDs corresponding to the grant profiles.
-        top_n (int): Number of top recommendations to return.
-    
-    Returns:
-        list: List of recommended grant IDs.
-    """
-    similarities = calculate_similarity(organization_profile, grant_profiles)
-    top_indices = np.argsort(similarities)[-top_n:][::-1]
-    recommended_grants = [grant_ids[i] for i in top_indices]
-    return recommended_grants
+```pseudo
+# Step 1: Data Preprocessing
+function preprocess_data(organization_data, grant_data):
+    # Clean and normalize text data (e.g., organization descriptions, grant descriptions)
+    cleaned_org_data = clean_and_normalize(organization_data)
+    cleaned_grant_data = clean_and_normalize(grant_data)
 
-# Example usage
-if __name__ == "__main__":
-    # Example organization profile (vectorized features)
-    organization_profile = np.array([0.1, 0.2, 0.5, 0.3])
+    # Feature extraction (e.g., keywords, topics)
+    org_features = extract_features(cleaned_org_data)
+    grant_features = extract_features(cleaned_grant_data)
 
-    # Example grant profiles (matrix of vectorized features)
-    grant_profiles = np.array([
-        [0.2, 0.1, 0.6, 0.3],
-        [0.5, 0.1, 0.2, 0.4],
-        [0.1, 0.3, 0.7, 0.1],
-        [0.3, 0.4, 0.2, 0.6]
-    ])
+    # Vectorization (e.g., TF-IDF, Word2Vec)
+    org_vectors = vectorize(org_features)
+    grant_vectors = vectorize(grant_features)
 
-    # Corresponding grant IDs
-    grant_ids = ['grant1', 'grant2', 'grant3', 'grant4']
+    return org_vectors, grant_vectors
 
-    # Get top 2 recommendations
-    top_recommendations = recommend_grants(organization_profile, grant_profiles, grant_ids, top_n=2)
-    print(f"Top Recommendations: {top_recommendations}")
+# Step 2: Model Selection
+function train_model(org_vectors, grant_vectors, interaction_data):
+    # Initialize model (e.g., Matrix Factorization, Collaborative Filtering, or Content-Based Filtering)
+    model = initialize_model()
+
+    # Train the model using past interaction data (e.g., grants awarded to organizations)
+    model.train(org_vectors, grant_vectors, interaction_data)
+
+    return model
+
+# Step 3: Making Recommendations
+function make_recommendations(organization, model, grant_data):
+    # Preprocess the organization's data
+    org_vector = preprocess_data(organization)
+
+    # Predict grant matches using the trained model
+    recommendations = model.predict(org_vector, grant_data)
+
+    # Rank recommendations by relevance score
+    ranked_recommendations = rank_by_relevance(recommendations)
+
+    return ranked_recommendations
+
+# Step 4: Measuring Success
+function measure_success(predictions, actual_outcomes):
+    # Calculate metrics (e.g., precision, recall, F1-score)
+    precision = calculate_precision(predictions, actual_outcomes)
+    recall = calculate_recall(predictions, actual_outcomes)
+    f1_score = calculate_f1(precision, recall)
+
+    return precision, recall, f1_score
+
+# Step 5: Continuous Optimization
+function optimize_model(model, new_interactions):
+    # Update model with new interaction data
+    model.update(new_interactions)
+
+    # Re-train or fine-tune the model to improve granularity
+    model.retrain()
+
+    return model
+
+# Step 6: Handling New Clients
+function handle_new_client(new_client, model, grant_data):
+    # Check if new client has sufficient data for personalized recommendations
+    if has_sufficient_data(new_client):
+        recommendations = make_recommendations(new_client, model, grant_data)
+    else:
+        # Provide generalized recommendations (e.g., based on similar organizations)
+        recommendations = recommend_based_on_similar_organizations(new_client, model, grant_data)
+
+    return recommendations
+
+# Main Execution Flow
+function main():
+    # Load and preprocess data
+    org_data, grant_data = load_data()
+    org_vectors, grant_vectors = preprocess_data(org_data, grant_data)
+
+    # Train the recommendation model
+    interaction_data = load_interaction_data()
+    model = train_model(org_vectors, grant_vectors, interaction_data)
+
+    # Make recommendations for a specific organization
+    organization = get_organization_data()
+    recommendations = make_recommendations(organization, model, grant_data)
+
+    # Measure the success of recommendations
+    actual_outcomes = get_actual_outcomes(organization)
+    precision, recall, f1_score = measure_success(recommendations, actual_outcomes)
+
+    # Optimize model over time
+    new_interactions = collect_new_interactions()
+    optimized_model = optimize_model(model, new_interactions)
+
+    # Handle recommendations for new clients
+    new_client = get_new_client_data()
+    new_client_recommendations = handle_new_client(new_client, optimized_model, grant_data)
+
+    return recommendations, new_client_recommendations, precision, recall, f1_score
+
 ```
+
+### Explanation of Pseudo Code Components:
+
+1. **Preprocess Data:** 
+   - Clean and normalize the data.
+   - Extract relevant features and convert them into vector representations using techniques like TF-IDF or Word2Vec.
+
+2. **Model Selection:**
+   - Train a model using past interaction data. Depending on the data characteristics, models like Matrix Factorization, Collaborative Filtering, or Content-Based Filtering can be used.
+
+3. **Making Recommendations:**
+   - Use the trained model to predict and rank the most relevant grants for a given organization.
+
+4. **Measuring Success:**
+   - Evaluate the model’s performance using metrics such as precision, recall, and F1-score.
+
+5. **Continuous Optimization:**
+   - Continuously update and retrain the model with new interaction data to improve its recommendations over time.
+
+6. **Handling New Clients:**
+   - Provide personalized or generalized recommendations based on the availability of data for new clients.
+
+This pseudo code provides a high-level overview of the core functionality required to build a recommendation engine for matching organizations with grant-offering organizations. The actual implementation would involve more detailed steps, data structures, and algorithms tailored to the specific dataset and use case.
 
 ### **Conclusion**
 
