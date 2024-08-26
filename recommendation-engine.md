@@ -8,7 +8,7 @@ The objective is to design a recommendation engine that matches organizations wi
 #### **Preprocessing Steps**
 
 1. **Data Cleaning**:
-   - **Remove Duplicates**: Ensure no duplicate grant records are present.
+   - **Remove Duplicates**: Ensure no duplicate grant records are present. If duplicates are needed categorize them.
    - **Handle Missing Values**: Impute missing data or discard records with incomplete information, depending on the significance of the missing data.
    - **Normalize Text Data**: Convert all text data to lowercase, remove special characters, and apply stemming/lemmatization to standardize the text fields.
 
