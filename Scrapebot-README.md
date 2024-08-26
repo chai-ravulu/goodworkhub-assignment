@@ -6,6 +6,7 @@ I started to get my hands dirty with some run of the mill python code about scra
    - I refined my idea to have the code to get integrate with Search API like Bing to get the relevant websites dynamically.
    - Once we have that, I realized that all the websites will not have a standardized formating in having their grant information in their websites. We need something better and interesting to be intelligent about scraping the relavant text from the websites that we hit.
    - I played around with some refinements in the code to have a Chat GPT 4 integration to extract the relevant information from the parsed website text to make our bot more intelligent. I didn't do this before and this is something new and very exciting for me.
+   - I'm a data engineer breaking into the world of AI & data science so I couldn't write the codebase for recommendation engine compeletely but I've documented some ideas around how you can solve the problem.
    - I tried to have the code documented and included the explanation. I used LLMs for markdown formatting and help with the code. Please comment/reachout for any questions.
 
 
