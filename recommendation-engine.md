@@ -17,7 +17,7 @@ The objective is to design a recommendation engine that matches organizations wi
    - **Feature Extraction**: Extract features such as organization size, geographical location, grant amount, deadlines, and eligibility criteria. Use NLP techniques like TF-IDF to extract features from textual descriptions.
 
 3. **Data Transformation**:
-   - **Vectorization**: Convert categorical data into numerical form using one-hot encoding or embedding techniques. For textual data, calculate cosine similarity and use vectorization techniques like TF-IDF, word embeddings (Word2Vec, GloVe), or sentence embeddings (BERT). 
+   - **Vectorization**: Convert categorical data into numerical form using one-hot encoding or embedding techniques. For textual data, use vectorization techniques like TF-IDF, word embeddings (Word2Vec, GloVe), or sentence embeddings (BERT). 
    - **Scaling**: Normalize numerical features like grant amount, organization size, etc., to ensure uniformity in the feature space.
 
 #### **Data Utilization**
