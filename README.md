@@ -25,6 +25,10 @@ The objective is to develop an intelligent web scraper that:
 3. **Processes Data with an LLM**: Utilizes a Large Language Model (LLM) to intelligently interpret and structure the extracted information.
 4. **Stores Data**: Saves the structured data in a CSV file for further analysis.
 
+## Flow Chart
+![image](https://github.com/user-attachments/assets/d935c3b3-c8be-49b4-8066-117dee782587)
+
+
 ## Solution Overview
 
 ### Steps to Automatically Identify and Scrape Relevant Websites
