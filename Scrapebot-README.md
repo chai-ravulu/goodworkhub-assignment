@@ -2,7 +2,7 @@
 ## Initial Comments from Chai Ravulu
 
 I started to get my hands dirty with some run of the mill python code about scraping. I was going in a direction of having the code scrape the relevant information when you supply it relevant websites. Some of the interesting challenges I faced when developing the psuedo code are:
-   - Most of the example usecases tend to be static in a sense that if you supply websites then it will scrape the relevant information. then I realized that this approach wouldn't scale in real life.
+   - Most of the example usecases tend to be static in a sense that if you supply websites then it will scrape the relevant information then I realized that this approach wouldn't scale in real life.
    - I refined my idea to have the code to get integrate with Search API like Bing to get the relevant websites dynamically.
    - Once we have that, I realized that all the websites will not have a standardized formating in having their grant information in their websites. We need something better and interesting to be intelligent   
      about scraping the relavant text from the websites that we hit.
